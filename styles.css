@@ -1,0 +1,209 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+:root {
+    --primary-color: #007AFF;
+    --danger-color: #FF3B30;
+    --success-color: #34C759;
+    --bg-color: #F2F2F7;
+    --card-bg: #FFFFFF;
+    --text-primary: #1C1C1E;
+    --text-secondary: #8E8E93;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-color: #1C1C1E;
+        --card-bg: #2C2C2E;
+        --text-primary: #FFFFFF;
+        --text-secondary: #8E8E93;
+    }
+}
+
+body {
+    background-color: var(--bg-color);
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    color: var(--text-primary);
+    transition: background-color 0.3s ease;
+}
+
+.container {
+    width: min(100%, 400px);
+    padding: 1rem;
+}
+
+.timer-card {
+    background-color: var(--card-bg);
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+.mode-selector {
+    display: flex;
+    gap: 0.5rem;
+    background-color: var(--bg-color);
+    padding: 0.25rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+}
+
+.mode-btn {
+    flex: 1;
+    padding: 0.75rem;
+    border: none;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    background: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.mode-btn.active {
+    background-color: var(--card-bg);
+    color: var(--text-primary);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.timer {
+    position: relative;
+    width: 280px;
+    height: 280px;
+    margin: 0 auto 2rem;
+}
+
+.timer::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    opacity: 0.15;
+    animation: pulse 2s ease-in-out infinite;
+    animation-play-state: paused;
+}
+
+.timer.running::before {
+    animation-play-state: running;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 0.15;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 0.25;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 0.15;
+    }
+}
+
+.progress-ring {
+    position: relative;
+    transform: rotate(-90deg);
+}
+
+.progress-ring__circle-bg {
+    fill: none;
+    stroke: var(--bg-color);
+    stroke-width: 8;
+}
+
+.progress-ring__circle {
+    fill: none;
+    stroke: var(--primary-color);
+    stroke-width: 8;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 0.3s ease;
+}
+
+.time-display {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3.5rem;
+    font-weight: 300;
+    color: var(--text-primary);
+    letter-spacing: -1px;
+}
+
+.controls {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+#startBtn {
+    flex: 1;
+    padding: 1rem;
+    border: none;
+    border-radius: 12px;
+    background-color: var(--primary-color);
+    color: white;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+#resetBtn {
+    padding: 0.75rem;
+    border: none;
+    border-radius: 10px;
+    background-color: var(--bg-color);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+#resetBtn svg {
+    width: 20px;
+    height: 20px;
+    fill: var(--text-secondary);
+    transition: fill 0.2s ease;
+}
+
+/* Hover states */
+.mode-btn:hover {
+    color: var(--text-primary);
+}
+
+#startBtn:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+#resetBtn:hover {
+    background-color: var(--primary-color);
+}
+
+#resetBtn:hover svg {
+    fill: white;
+}
+
+/* Active states */
+#startBtn:active {
+    transform: translateY(0);
+}
+
+#resetBtn:active {
+    transform: scale(0.95);
+} 

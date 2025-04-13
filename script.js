@@ -28,10 +28,6 @@ function updateDisplay() {
     timeDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
     const progress = ((totalSeconds - timeLeft) / totalSeconds) * 100;
     setProgress(progress);
-    
-    // Adjust animation speed based on time left
-    const animationDuration = Math.max(1, Math.min(3, timeLeft / 60));
-    timerElement.style.animationDuration = `${animationDuration}s`;
 }
 
 function switchMode(mode) {
@@ -65,13 +61,11 @@ function startTimer() {
         }, 1000);
         startBtn.textContent = 'Pause';
         startBtn.style.backgroundColor = 'var(--danger-color)';
-        timerElement.classList.add('running');
     } else {
         clearInterval(timer);
         timer = null;
         startBtn.textContent = 'Start';
         startBtn.style.backgroundColor = 'var(--primary-color)';
-        timerElement.classList.remove('running');
     }
 }
 
@@ -84,7 +78,6 @@ function resetTimer() {
     updateDisplay();
     startBtn.textContent = 'Start';
     startBtn.style.backgroundColor = 'var(--primary-color)';
-    timerElement.classList.remove('running');
 }
 
 // Event Listeners
